@@ -20,8 +20,8 @@ export const addComment = async (req, res) => {
     
         // Populate user details in the response
         const populatedBlog = await Blog.findById(blog._id)
-        .populate('comments.user', 'email')
-        .populate('comments.replies.user', 'email')
+        .populate('comments.user', 'name email')
+        .populate('comments.replies.user', 'name email')
     
         res.status(201).json({
           success: true,
