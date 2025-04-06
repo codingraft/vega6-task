@@ -59,8 +59,8 @@ export const addReply = async (req, res) => {
     
         // Populate user details in the response
         const populatedBlog = await Blog.findById(blog._id)
-          .populate('comments.user', 'username email')
-          .populate('comments.replies.user', 'username email');
+          .populate('comments.user', 'name email')
+          .populate('comments.replies.user', 'name email');
     
         const updatedComment = populatedBlog.comments.id(commentId);
         
@@ -78,8 +78,8 @@ export const addReply = async (req, res) => {
 export const getComments = async (req, res) => {
     try {
         const blog = await Blog.findById(req.params.blogId)
-          .populate('comments.user', 'username email')
-          .populate('comments.replies.user', 'username email')
+          .populate('comments.user', 'name email')
+          .populate('comments.replies.user', 'name email')
           .select('comments');
     
         if (!blog) {
